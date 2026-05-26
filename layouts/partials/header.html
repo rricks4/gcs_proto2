@@ -1,6 +1,6 @@
 <nav id="topnav" class="defaultscroll is-sticky">
     <div class="container relative">
-        <a class="logo" href="{{ "/" | relLangURL }}">
+        <a class="logo" href="{{ .Site.Home.RelPermalink }}">
             {{ $siteTitle := .Site.Title }}
             {{ with resources.Get "logos/logo.png" }}
               <img src="{{ .RelPermalink }}" class="l-dark h-[54px] w-auto" width="{{ .Width }}" height="{{ .Height }}" fetchpriority="high" alt="{{ $siteTitle }} Logo">
@@ -25,12 +25,20 @@
                       <a href="#" onclick="return false;">{{ .Name }}</a><span class="menu-arrow"></span>
                       <ul class="submenu services-submenu"><li><ul>
                         {{ range $.Site.Menus.services }}
-                          <li><a href="{{ .URL | safeURL }}" class="sub-menu-item text-base"><i class="{{ .Params.icon }}"></i> {{ .Name }}{{ if .Params.extraSpacing }}&nbsp;&nbsp;&nbsp;{{ end }}</a></li>
+                          {{ $menuURL := .URL }}
+                          {{ if strings.HasPrefix $menuURL "/" }}
+                            {{ $menuURL = strings.TrimPrefix "/" $menuURL | relURL }}
+                          {{ end }}
+                          <li><a href="{{ $menuURL | safeURL }}" class="sub-menu-item text-base"><i class="{{ .Params.icon }}"></i> {{ .Name }}{{ if .Params.extraSpacing }}&nbsp;&nbsp;&nbsp;{{ end }}</a></li>
                         {{ end }}
                       </ul></li></ul>
                     </li>
                   {{ else }}
-                    <li><a href="{{ .URL | safeURL }}" class="sub-menu-item">{{ .Name }}</a></li>
+                    {{ $menuURL := .URL }}
+                    {{ if strings.HasPrefix $menuURL "/" }}
+                      {{ $menuURL = strings.TrimPrefix "/" $menuURL | relURL }}
+                    {{ end }}
+                    <li><a href="{{ $menuURL | safeURL }}" class="sub-menu-item">{{ .Name }}</a></li>
                   {{ end }}
                 {{ end }}
                 <li class="has-submenu parent-parent-menu-item">
@@ -111,7 +119,7 @@
                                       {{ with resources.GetMatch $flagPath }}
                                         <img src="{{ .RelPermalink }}" alt="{{ $altText }}" width="{{ .Width }}" height="{{ .Height }}" class="h-5 w-auto lg:w-5 lg:h-5 object-contain flex-shrink-0">
                                       {{ else }}
-                                        <img src="/images/navbar/flags/{{ $langFlag }}.webp" alt="{{ $altText }}" class="h-5 w-auto lg:w-5 lg:h-5 object-contain flex-shrink-0">
+                                        <img src="{{ printf "images/navbar/flags/%s.webp" $langFlag | relURL }}" alt="{{ $altText }}" class="h-5 w-auto lg:w-5 lg:h-5 object-contain flex-shrink-0">
                                       {{ end }}
                                     {{ else }}
                                       <span class="inline-flex w-auto h-5 lg:w-5 lg:h-5 items-center justify-center rounded-xs bg-slate-200 text-sm lg:text-[0.65rem] font-semibold uppercase text-slate-700 flex-shrink-0 px-2">{{ $langCode }}</span>

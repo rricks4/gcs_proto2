@@ -2,6 +2,7 @@
 public/
 resources/
 exampleSite/resources/
+.hugo_cache/
 
 # Binaries for programs and plugins
 *.exe
