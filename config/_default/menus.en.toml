@@ -1,0 +1,26 @@
+[[main]]
+name = "Home"
+url = "/"
+weight = 10
+
+[[main]]
+name = "About"
+url = "/about/"
+weight = 20
+
+[[main]]
+name = "News & Events"
+url = "/news/"
+weight = 30
+
+[[main]]
+name = "Careers"
+url = "/careers/"
+weight = 40
+
+[[main]]
+name = "Contract Vehicles"
+url = "/contract-vehicles/"
+weight = 50
+
+

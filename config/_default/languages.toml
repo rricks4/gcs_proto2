@@ -1,0 +1,39 @@
+[en]
+languageName = "English"
+languageCode = "en-us"
+contentDir = "content"
+title = "Global Commerce and Services"
+weight = 1
+
+[en.params]
+footer_copyright = "Copyright {year} Global Commerce and Services.\n\nAll rights reserved."
+footer_social_media = "Follow Us"
+footer_listed_with = "Affiliations"
+footer_listed_with_text = "The appearance of U.S. Department of War (DOW) media does not imply or constitute DOW endorsement."
+flag_image = "unitedstates"
+flag_alt = "American"
+label = "English"
+
+[[en.params.social_media]]
+name = "Twitter"
+url = "https://twitter.com/"
+title = "Follow us on Twitter"
+icon = "uil uil-twitter"
+
+[[en.params.social_media]]
+name = "LinkedIn"
+url = "https://www.linkedin.com/"
+title = "Connect on LinkedIn"
+icon = "uil uil-linkedin"
+
+[[en.params.social_media]]
+name = "GitHub"
+url = "https://github.com/"
+title = "View our GitHub"
+icon = "uil uil-github"
+
+[[en.params.social_media]]
+name = "Instagram"
+url = "https://instagram.com/"
+title = "Follow on Instagram"
+icon = "uil uil-instagram"

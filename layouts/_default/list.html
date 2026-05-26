@@ -1,0 +1,32 @@
+{{ define "main" }}
+  {{ partial "blocks/blocks" . }}
+
+  <main class="mx-auto mb-24 max-w-6xl px-6 lg:px-8">
+    <div class="mt-8 sm:mt-12">
+      {{ if .Content }}
+        <div class="prose font-gotham lg:prose-lg prose-headings:text-primary prose-strong:text-primary max-w-4xl break-words">
+          {{ .Content }}
+        </div>
+      {{ end }}
+
+      {{ $pages := .Pages.ByWeight }}
+      {{ if $pages }}
+        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {{ range $pages }}
+            <article class="flex h-full flex-col rounded border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 class="text-xl font-semibold text-primary">
+                <a class="hover:text-secondary" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+              </h2>
+              {{ with .Summary }}
+                <p class="mt-4 grow text-slate-700">{{ . | plainify | truncate 180 }}</p>
+              {{ end }}
+              <a class="mt-6 inline-flex font-semibold text-secondary hover:text-primary" href="{{ .RelPermalink }}">
+                Read more
+              </a>
+            </article>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </main>
+{{ end }}

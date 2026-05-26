@@ -1,0 +1,56 @@
+{{ define "main" }}
+  <section class="relative table w-full py-36" id="start">
+    {{ $backgroundSrc := .Params.image | default "headers/ezgif-19325b041f7da5d6.gif" }}
+    {{ $altText := .Params.image_alt | default .Title | default "News background" }}
+    <div class="absolute inset-0">
+      {{ partial "components/image-responsive.html" (dict
+        "src" (strings.TrimPrefix "/" $backgroundSrc)
+        "alt" $altText
+        "class" "h-full w-full object-cover object-center"
+        "loading" "eager"
+        "fetchpriority" "high"
+        "sizes" "(max-width: 1920px) 100vw, 1920px"
+        "widths" (slice 480 640 768 960 1024 1280 1536 1920 2560 3072 3840)
+        "maxDisplayWidth" 1920
+      ) }}
+    </div>
+    <div class="absolute inset-0 bg-black opacity-60"></div>
+    <div class="container relative">
+      <div class="mt-10 grid grid-cols-1 pb-8 text-center">
+        <h1 class="mx-auto mb-5 max-w-5xl text-3xl font-medium leading-normal tracking-wide text-white md:text-4xl md:leading-normal">{{ .Title }}</h1>
+        {{ with .Description }}
+          <p class="mx-auto max-w-3xl text-2xl text-white">{{ . }}</p>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="absolute bottom-5 start-0 end-0 z-10 mx-3 text-center">
+      <ul class="mb-0 inline-block tracking-[0.5px]">
+        <li class="inline-block text-[13px] font-bold uppercase text-white/50 duration-500 ease-in-out hover:text-white"><a href="{{ "/" | relLangURL }}">Home</a></li>
+        <li class="mx-0.5 inline-block text-base text-white/50 ltr:rotate-0 rtl:rotate-180"><i class="uil uil-angle-right-b"></i></li>
+        <li class="inline-block text-[13px] font-bold uppercase text-white/50 duration-500 ease-in-out hover:text-white"><a href="{{ "/contract-vehicles/" | relLangURL }}">Contract Vehicles</a></li>
+        <li class="mx-0.5 inline-block text-base text-white/50 ltr:rotate-0 rtl:rotate-180"><i class="uil uil-angle-right-b"></i></li>
+        <li class="inline-block text-[13px] font-bold uppercase text-white" aria-current="page">{{ .Params.breadcrumb | default .Title }}</li>
+      </ul>
+    </div>
+  </section>
+  <div class="relative">
+    <div class="shape absolute -bottom-[2px] start-0 end-0 z-1 overflow-hidden text-white sm:-bottom-px">
+      <svg class="h-auto w-full origin-top scale-[2.0]" viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+      </svg>
+    </div>
+  </div>
+
+  {{ partial "blocks/blocks" . }}
+
+  {{ if .Content }}
+    <section class="relative py-16 md:py-24">
+      <div class="container relative">
+        <article class="prose prose-lg prose-headings:text-primary prose-a:text-primary mx-auto max-w-4xl text-slate-700">
+          {{ .Content }}
+        </article>
+      </div>
+    </section>
+  {{ end }}
+{{ end }}
